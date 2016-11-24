@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app="app" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Skyrim Texture Companion</title>
+    <link rel="stylesheet" href="vendors.css">
+    <link rel="stylesheet" href="app.css">
+</head>
+<body ng-controller="AppController">
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>Skyrim Texture Companion</h1>
+            <div class="picker">
+                <select class="slider-header-left" ng-model="selection.packs.left">
+                    <option ng-repeat="pack in packs" class="dropdown-item" href="#" value="{{ pack.title }}">
+                        {{pack.title}}
+                    </option>
+                </select>
+                <select class="image-picker" ng-if="packs" ng-model="selection.image"
+                        ng-options="image as image + 1 for image in images">
+                </select>
+                <select class="slider-header-right" ng-model="selection.packs.right">
+                    <option ng-repeat="pack in packs" class="dropdown-item" href="#" value="{{ pack.title }}">
+                        {{pack.title}}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="slider">
+                <div class="slider responsive">
+                    <div class="left image">
+                        <img  ng-if="loaded" src="{{ packs[getPackIndex(selection.packs.left)].paths[selection.image] }}"/>
+                    </div>
+                    <div class="right image">
+                        <img src="{{ packs[getPackIndex(selection.packs.right)].paths[selection.image] }}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="vendors.js"></script>
+<script src="app.js"></script>
+<script type="text/javascript">
+    $('.slider').slider({
+        showInstruction: false
+    });
+</script>
+</body>
+</html>

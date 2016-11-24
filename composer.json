@@ -1,0 +1,7 @@
+{
+    "name": "mrmnml/stc",
+    "require": {
+        "silex/silex" :"~2.0",
+        "twig/twig": "^1.28"
+    }
+}
