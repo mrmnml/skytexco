@@ -72,6 +72,6 @@ gulp.task('default', ['complete'], function () {
     gulp.watch('src/*.html', ['html']);
     gulp.watch('src/*.php', ['php']);
 });
-gulp.task('app', ['app-less', 'app-js', 'html', 'php', 'images']);
+gulp.task('app', ['app-less', 'app-js', 'html', 'php']);
 gulp.task('vendors', ['vendors-css', 'vendors-js']);
 gulp.task('complete', ['app', 'vendors']);
