@@ -16,6 +16,8 @@ function AppController($scope, $http, $location) {
     vm.getPackIndex = getPackIndex;
     vm.slider = null;
     vm.loaded = false;
+    vm.getThumb = getThumb;
+    vm.selectImage = selectImage;
 
     activate();
 
@@ -39,12 +41,20 @@ function AppController($scope, $http, $location) {
         var i = 0;
         var res;
         angular.forEach(vm.packs, function (pack) {
-            if (pack.title == name){
+            if (pack.title == name) {
                 res = i;
             }
             i++;
         });
         return res;
+    }
+
+    function getThumb(n) {
+        return vm.packs[getPackIndex('thumbs')].paths[n];
+    }
+
+    function selectImage(n) {
+        vm.selection.image = n;
     }
 
 

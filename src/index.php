@@ -8,8 +8,9 @@ $app['albumMap'] = array(
     'olt' => 'Osmodius',
     'vanilla' => 'Vanilla',
     '2017' => 'Skyrim 2017',
-    'skyland' => 'Skyland',
+    'skyland' => 'Skyland v1',
     'yalo' => 'Yalo',
+    'thumbs' => 'thumbs',
 );
 
 $app->register(new Silex\Provider\TwigServiceProvider(), array(

@@ -7,44 +7,53 @@
     <link rel="stylesheet" href="app.css">
 </head>
 <body ng-controller="AppController">
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12">
-            <h1>Skyrim Texture Companion</h1>
-            <div class="picker">
-                <select class="custom-select" ng-model="selection.packs.left">
-                    <option ng-repeat="pack in packs" class="dropdown-item" href="#" value="{{ pack.title }}">
-                        {{pack.title}}
-                    </option>
-                </select>
-                <select class="custom-select" ng-if="packs" ng-model="selection.image"
-                        ng-options="image as image + 1 for image in images">
-                </select>
-                <select class="custom-select" ng-model="selection.packs.right">
-                    <option ng-repeat="pack in packs" class="dropdown-item" href="#" value="{{ pack.title }}">
-                        {{pack.title}}
-                    </option>
-                </select>
-                <br>Click and drag the image below to compare!
-
-            </div>
-        </div>
+<div class="side">
+    <div class="side-title">
+        <h1>Skyrim<br>Texture<br>Companion</h1>
     </div>
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="slider">
-                <div class="slider responsive">
-                    <div class="left image">
-                        <img  ng-if="loaded" src="{{ packs[getPackIndex(selection.packs.left)].paths[selection.image] }}"/>
-                    </div>
-                    <div class="right image">
-                        <img src="{{ packs[getPackIndex(selection.packs.right)].paths[selection.image] }}"/>
-                    </div>
+    <div class="thumbs">
+        <img class="thumb" ng-repeat="image in images" ng-click="selectImage(image)" src="{{getThumb(image)}}" alt="">
+    </div>
+    <!--<select class="custom-select" ng-if="packs" ng-model="selection.image"-->
+    <!--ng-options="image as image + 1 for image in images">-->
+    <!--</select>-->
+    <a href="https://github.com/mrmnml/skytexco" class="git">click for some git</a>
+</div>
+<div class="main">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="picker">
+                    <select class="custom-select" ng-model="selection.packs.left">
+                        <option ng-repeat="pack in packs" class="dropdown-item" href="#" ng-if="pack.title !== 'thumbs'"
+                                value="{{ pack.title }}">
+                            {{pack.title}}
+                        </option>
+                    </select>
+
+                    <select class="custom-select" ng-model="selection.packs.right">
+                        <option ng-repeat="pack in packs" class="dropdown-item" href="#" ng-if="pack.title !== 'thumbs'"
+                                value="{{ pack.title }}">
+                            {{pack.title}}
+                        </option>
+                    </select>
                 </div>
             </div>
         </div>
-        <div class="col-xs-12">
-            <a href="https://github.com/mrmnml/skytexco" class="git">click for some git</a>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="slider">
+                    <div class="slider responsive">
+                        <div class="left image">
+                            <img ng-if="loaded"
+                                 src="{{ packs[getPackIndex(selection.packs.left)].paths[selection.image] }}"/>
+                        </div>
+                        <div class="right image">
+                            <img src="{{ packs[getPackIndex(selection.packs.right)].paths[selection.image] }}"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
