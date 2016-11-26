@@ -1,0 +1,46 @@
+STC beta plan
+
+
+Backlog:
+	0. Contact mod authors
+	1. Exact version numbers of texture packs used -> /u/neversleeps84
+	2. Add mod author names/copyright
+	3. Links to packs
+	4. Thumbnails instead of select list
+	5. Domain
+	6. Layout stuff (fullscreen option, mobile, etc)
+	7. Support for multiple comparison types? (e.g. weather, meshes)
+	8. Organization/representation of images:
+		Use of tags to classify images: "interior", "farm", "night", "sweetroll"
+	9. TRIPLE COMPARISONS????
+
+	Aand the big one:
+	10. User contribution
+		Options:
+			1. Users send their albums via Dropbox etc, I add them. Simple. But also boring.
+			2. Users can upload albums with a fixed number of images directly to the site.
+				There would be a standard set of locations & camera angles. Uploaded images must be named 01.jpg, 02.jpg, etc.
+				The album can either represent a texture pack that is not yet on the site or a different version of an existing one.
+
+				User input needed:
+					Name, new or existing texture pack?, author, link, version, folder
+
+				Requirements:
+					Upload page
+					File management
+					Persistence
+					UI update
+					Security
+
+				Community input needed:
+					Maybe a group of texture mod authors/texture connaisseurs (whatever that means) could agree on a set of suitable locations (good mix of textures, close-up and distant shots, etc)
+					Should there be some kind of default graphic settings? I'm not thinking every single slider has to be at the right value, but there should be a common resolution, FOV (obviously), ... what else?
+					IMO there are two ways comparability can be ensured:
+						1. Use of savegames -> /u/neversleeps84
+						2. Mod for easily taking screenshots:
+							I think this should be possible: add a book/spell/idontknow (MCM WE NEED YOU) that teleports the player to predefined locations and sets their viewing angle.
+							~ 30 shots, fixed time of day/weather, fixed camera angle
+
+
+	Aaaaaaand the really big one:
+	11. We need a snazzy name.
