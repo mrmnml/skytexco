@@ -6,34 +6,44 @@
     <link rel="stylesheet" href="vendors.css">
     <link rel="stylesheet" href="app.css">
 </head>
-<body ng-controller="AppController">
+<body ng-controller="AppController as vm">
 <div class="side">
-    <div class="side-title">
-        <h1>Skyrim<br>Texture<br>Companion</h1>
+    <div class="side-head">
+        <h1 class="side-title">
+            Skyrim<br>
+            Texture<br>
+            Companion
+        </h1>
     </div>
-    <div class="thumbs">
-        <img class="thumb" ng-repeat="image in images" ng-click="selectImage(image)" src="{{getThumb(image)}}" alt="">
+    <div class="side-main">
+        <div class="thumbs">
+            <img class="thumb" ng-repeat="image in vm.images" ng-class="{active:vm.isSelectedImage(image)}"
+                 ng-click="vm.selectImage(image)" ng-src="{{ vm.getThumb(image) }}"
+                 alt="" width="178" height="100">
+        </div>
     </div>
     <!--<select class="custom-select" ng-if="packs" ng-model="selection.image"-->
     <!--ng-options="image as image + 1 for image in images">-->
     <!--</select>-->
-    <a href="https://github.com/mrmnml/skytexco" class="git">click for some git</a>
+    <div class="side-footer">
+        <a href="https://github.com/mrmnml/skytexco" class="git">click for some git</a>
+    </div>
 </div>
 <div class="main">
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
                 <div class="picker">
-                    <select class="custom-select" ng-model="selection.packs.left">
-                        <option ng-repeat="pack in packs" class="dropdown-item" href="#" ng-if="pack.title !== 'thumbs'"
-                                value="{{ pack.title }}">
+                    <select class="custom-select" ng-model="vm.selection.packs.left">
+                        <option ng-repeat="pack in vm.packs" class="dropdown-item" href="#" ng-if="pack.title !== 'thumbs'"
+                                value="{{ pack.id }}">
                             {{pack.title}}
                         </option>
                     </select>
-
-                    <select class="custom-select" ng-model="selection.packs.right">
-                        <option ng-repeat="pack in packs" class="dropdown-item" href="#" ng-if="pack.title !== 'thumbs'"
-                                value="{{ pack.title }}">
+                    <span class="image-number">#{{ vm.selection.image +1 }}</span>
+                    <select class="custom-select" ng-model="vm.selection.packs.right">
+                        <option ng-repeat="pack in vm.packs" class="dropdown-item" href="#" ng-if="pack.title !== 'thumbs'"
+                                value="{{ pack.id }}">
                             {{pack.title}}
                         </option>
                     </select>
@@ -45,16 +55,17 @@
                 <div class="slider">
                     <div class="slider responsive">
                         <div class="left image">
-                            <img ng-if="loaded"
-                                 src="{{ packs[getPackIndex(selection.packs.left)].paths[selection.image] }}"/>
+                            <dyn-img loading="vm.loading.left" ng-if="vm.loaded" dyn-src="vm.imageUrl.left"></dyn-img>
                         </div>
-                        <div class="right image">
-                            <img src="{{ packs[getPackIndex(selection.packs.right)].paths[selection.image] }}"/>
-                        </div>
+                        <!--<div class="right image">-->
+                            <!--&lt;!&ndash;<img position="right" />&ndash;&gt;-->
+                            <!--<img loading="vm.loading.right" ng-if="vm.loaded" my-src="{{ vm.getImagePath('right') }}"/>-->
+                        <!--</div>-->
                     </div>
                 </div>
             </div>
         </div>
+        {{ vm.loading }}
     </div>
 </div>
 

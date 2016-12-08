@@ -9,14 +9,9 @@ $app['albumMap'] = array(
     'vanilla' => 'Vanilla',
     '2017' => 'Skyrim 2017',
     'skyland' => 'Skyland v1',
-    'yalo' => 'Yalo',
-    'thumbs' => 'thumbs',
+    'yalo' => 'Yalo'
 );
 
-$app->register(new Silex\Provider\TwigServiceProvider(), array(
-    'twig.path' => 'views',
-    'twig.autoescape' => true
-));
 
 $app->get('/', function () use ($app) {
     return file_get_contents('index.html');
@@ -24,11 +19,13 @@ $app->get('/', function () use ($app) {
 
 $app->get('/albums', function () use ($app) {
     $res = array();
-    $albumList = glob('images/*', GLOB_ONLYDIR);
+    $albumList = glob('images/packs/*', GLOB_ONLYDIR);
     foreach ($albumList as $album) {
-        $res[] = array(
-            'title' => $app['albumMap'][substr($album, 7)],
-            'paths' => glob($album . '/*.jpg'));
+        $id = substr($album,13);
+        $res[$id] = array(
+            'title' => $app['albumMap'][$id],
+            'id' => $id
+        );
     }
     return $app->json($res);
 });

@@ -1,3 +1,4 @@
+
 html {
   background-color: white;
 }
@@ -15,24 +16,59 @@ html, body, .container {
 
 .container {
   text-align: center;
-
   width: 90%;
 }
 
-.side-title {
-  position: relative;
-  h1 {
-    font-size: 30px;
-    color: #fff;
+.slider {
+  img {
+    background-image: none;
   }
 }
 
 .side {
-  padding: 10px;
+  padding: 20px 10px 10px 10px;
   background-color: #2b2d2f;
-  width: 200px;
+  width: 220px;
   position: fixed;
   height: 100%;
+
+  .side-head {
+    top: 0;
+    z-index: 10;
+    width: 180px;
+    height: 120px;
+    background-color: #2b2d2f;
+    h1 {
+      font-size: 30px;
+      color: #fff;
+    }
+  }
+  .side-main {
+    padding-bottom: 160px;
+    height: 100%;
+    .thumbs {
+      overflow-y: scroll;
+      overflow-x: hidden;
+      max-height: 100%;
+    }
+  }
+
+  .thumb {
+    margin-bottom: 10px;
+    cursor: pointer;
+    &.active {
+      border: 2px solid #fff;
+    }
+  }
+
+  .side-footer {
+    position: fixed;
+    bottom: 0;
+    z-index: 10;
+    width: 180px;
+    height: 50px;
+    background-color: #2b2d2f;
+  }
 }
 
 .main {
@@ -40,6 +76,12 @@ html, body, .container {
   height: 100%;
   margin-left: 200px;
   background-color: #1a1a1a;
+
+  .image-number {
+    color: #fff;
+    font-size: 20px;
+    vertical-align: middle;
+  }
 }
 
 .git {
@@ -47,13 +89,6 @@ html, body, .container {
   bottom: 10px;
 }
 
-.thumbs {
-  max-height: 80%;
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
-
-.thumb {
-  padding-bottom: 10px;
-  cursor: pointer;
+.loading {
+  background-color: #123123;
 }

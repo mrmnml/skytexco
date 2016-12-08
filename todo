@@ -1,18 +1,17 @@
 STC beta plan
 
-
 Backlog:
 	0. Contact mod authors
 	1. Exact version numbers of texture packs used -> /u/neversleeps84
 	2. Add mod author names/copyright
 	3. Links to packs
-	4. Thumbnails instead of select list
+ X  4. Thumbnails instead of select list
 	5. Domain
 	6. Layout stuff (fullscreen option, mobile, etc)
-	7. Support for multiple comparison types? (e.g. weather, meshes)
-	8. Organization/representation of images:
+ -	7. Support for multiple comparison types? (e.g. weather, meshes)
+ -	8. Organization/representation of images:
 		Use of tags to classify images: "interior", "farm", "night", "sweetroll"
-	9. TRIPLE COMPARISONS????
+ -	9. TRIPLE COMPARISONS????
 
 	Aand the big one:
 	10. User contribution
@@ -26,7 +25,7 @@ Backlog:
 					Name, new or existing texture pack?, author, link, version, folder
 
 				Requirements:
-					Upload page
+					Upload
 					File management
 					Persistence
 					UI update

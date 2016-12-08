@@ -1,4 +1,5 @@
 var
+    dev = true,
     gulp = require('gulp'),
     jshint = require('gulp-jshint'),
     concat = require('gulp-concat'),
@@ -13,6 +14,7 @@ var
             'node_modules/img-slider/js/imgslider.js',
             'node_modules/tether/dist/js/tether.js',
             'node_modules/bootstrap/dist/js/bootstrap.js',
+            'node_modules/revealer/src/revealer.js',
         ],
         css: [
             'node_modules/bootstrap/dist/css/bootstrap.css',
@@ -58,8 +60,13 @@ gulp.task('php', function () {
     return gulp.src('src/*.php')
         .pipe(gulp.dest('dist'))
 });
-gulp.task('images', function () {
-    return gulp.src('src/images/**/*.jpg', {base: 'src'})
+gulp.task('packs', function () {
+    return gulp.src('src/images/packs/**/*.jpg', {base: 'src'})
+        .pipe(imagemin([imagemin.jpegtran()]))
+        .pipe(gulp.dest('dist'))
+});
+gulp.task('thumbs', function () {
+    return gulp.src('src/images/thumbs/*.jpg', {base: 'src'})
         .pipe(imagemin([imagemin.jpegtran()]))
         .pipe(gulp.dest('dist'))
 });
@@ -72,6 +79,7 @@ gulp.task('default', ['complete'], function () {
     gulp.watch('src/*.html', ['html']);
     gulp.watch('src/*.php', ['php']);
 });
+gulp.task('media', ['packs', 'thumbs']);
 gulp.task('app', ['app-less', 'app-js', 'html', 'php']);
 gulp.task('vendors', ['vendors-css', 'vendors-js']);
 gulp.task('complete', ['app', 'vendors']);
