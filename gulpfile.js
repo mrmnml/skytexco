@@ -18,7 +18,11 @@ var
         ],
         css: [
             'node_modules/bootstrap/dist/css/bootstrap.css',
+            'node_modules/font-awesome/css/font-awesome.css',
             'node_modules/img-slider/css/imgslider.css',
+        ],
+        fonts: [
+            'node_modules/font-awesome/fonts/*',
         ]
     };
 
@@ -52,6 +56,10 @@ gulp.task('vendors-js', function () {
         .pipe(uglify())
         .pipe(gulp.dest('dist'))
 });
+gulp.task('vendors-fonts', function () {
+    return gulp.src(vendors.fonts)
+        .pipe(gulp.dest('dist/fonts'))
+});
 gulp.task('html', function () {
     return gulp.src('src/*.html')
         .pipe(gulp.dest('dist'))
@@ -81,5 +89,5 @@ gulp.task('default', ['complete'], function () {
 });
 gulp.task('media', ['packs', 'thumbs']);
 gulp.task('app', ['app-less', 'app-js', 'html', 'php']);
-gulp.task('vendors', ['vendors-css', 'vendors-js']);
+gulp.task('vendors', ['vendors-css', 'vendors-js', 'vendors-fonts']);
 gulp.task('complete', ['app', 'vendors']);

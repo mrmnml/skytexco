@@ -12,6 +12,7 @@
     "angular": "^1.5.8",
     "bootstrap": "4.0.0-alpha.5",
     "del": "^2.2.2",
+    "font-awesome": "^4.7.0",
     "gulp": "^3.9.1",
     "gulp-clean-css": "^2.0.13",
     "gulp-concat": "^2.6.1",

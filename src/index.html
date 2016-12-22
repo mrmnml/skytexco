@@ -53,9 +53,15 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="slider">
+                    <div class="spinner">
+                        <i ng-if="vm.bothLoaded()" class="fa fa-cog fa-spin fa-3x fa-fw "></i>
+                    </div>
                     <div class="slider responsive">
                         <div class="left image">
-                            <dyn-img loading="vm.loading.left" ng-if="vm.loaded" dyn-src="vm.imageUrl.left"></dyn-img>
+                            <dyn-img loading="vm.loading.left" ng-if="vm.loaded" dyn-src="vm.getImagePath('left')"></dyn-img>
+                        </div>
+                        <div class="right image">
+                            <dyn-img loading="vm.loading.right" ng-if="vm.loaded" dyn-src="vm.getImagePath('right')"></dyn-img>
                         </div>
                         <!--<div class="right image">-->
                             <!--&lt;!&ndash;<img position="right" />&ndash;&gt;-->
@@ -65,7 +71,7 @@
                 </div>
             </div>
         </div>
-        {{ vm.loading }}
+        {{ vm.selection }}
     </div>
 </div>
 

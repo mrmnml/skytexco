@@ -1,4 +1,4 @@
-var app = angular.module('app', ['revealer'])
+var app = angular.module('app', [])
     .controller('AppController', AppController);
 
 function AppController($scope, $http, $location, $timeout, $q) {
@@ -23,6 +23,7 @@ function AppController($scope, $http, $location, $timeout, $q) {
     vm.selectImage = selectImage;
     vm.getImagePath = getImagePath;
     vm.isSelectedImage = isSelectedImage;
+    vm.bothLoaded = bothLoaded;
     activate();
 
     //
@@ -74,13 +75,17 @@ function AppController($scope, $http, $location, $timeout, $q) {
     }
 
     function selectImage(n) {
-        // console.log('selected');
         vm.selection.image = n;
-        vm.imageUrl.left = getImagePath('left');
+    //     vm.imageUrl.left = ;
+    //     vm.imageUrl.right = ;
     }
 
     function isSelectedImage(n) {
         return vm.selection.image == n;
+    }
+
+    function bothLoaded() {
+         return (vm.loading.right && vm.loading.left);
     }
 }
 //
@@ -112,7 +117,7 @@ function AppController($scope, $http, $location, $timeout, $q) {
 //         }
 //
 
-app.directive("dynImg", function () {
+app.directive("dynImg", function ($q) {
     return {
         scope: {
             loading: '=',
@@ -122,19 +127,23 @@ app.directive("dynImg", function () {
         link: function MySrcLink(scope, element, attrs, ctrl) {
             // console.log(element);
             scope.$watch(function () {
-                return scope.dynSrc;
-            }, function () {
-                console.log('change detected');
-                var img = new Image();
-                img.onload = function () {
-                    scope.src = img.src;
-                    console.log('image loaded');
-
-                    console.log(scope);
-                };
-                img.src = scope.dynSrc;
-
-            });
+                    return scope.dynSrc;
+                }, function () {
+                    scope.loading = true;
+                    var img = new Image();
+                    img.onload = function () {
+                        return $q(function (resolve, reject) {
+                            if (element[0].children[0].src = img.src) {
+                                scope.loading = false;
+                                resolve(true);
+                            }
+                        }).then(function (res) {
+                            // scope.loading = false;
+                        });
+                    };
+                    img.src = scope.dynSrc;
+                }
+            );
         }
     };
 });
