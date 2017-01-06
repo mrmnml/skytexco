@@ -1,16 +1,15 @@
-var app = angular.module('app', [])
-    .controller('AppController', AppController);
-
-function AppController($scope, $http, $location, $timeout, $q) {
+function IndexController($scope, $http, $location, $timeout, $q) {
 
     var vm = this;
     vm.src = 'asd';
     vm.timeout = $timeout;
-    vm.selection = null;
-    vm.packs = null;
+    vm.selection = {
+        packs: {},
+        image: 0
+    };
+    vm.packs = [];
     vm.images = [];
     vm.slider = null;
-    vm.loaded = false;
     vm.loading = {
         left: false,
         right: false
@@ -23,7 +22,8 @@ function AppController($scope, $http, $location, $timeout, $q) {
     vm.selectImage = selectImage;
     vm.getImagePath = getImagePath;
     vm.isSelectedImage = isSelectedImage;
-    vm.bothLoaded = bothLoaded;
+    vm.loaded = loaded;
+
     activate();
 
     //
@@ -34,6 +34,7 @@ function AppController($scope, $http, $location, $timeout, $q) {
             for (var i = 0; i < 39; i++) {
                 vm.images.push(i);
             }
+
             // fill selection
             vm.selection = {
                 packs: {
@@ -42,19 +43,17 @@ function AppController($scope, $http, $location, $timeout, $q) {
                 },
                 image: 0
             };
-            vm.loaded = true;
 
-            // vm.$watch('selection.image',function(oldV,newV) {
-            //     console.log(vm.selection.image);
-            //     vm.imageUrl.left = getImagePath('left');
-            //     vm.imageUrl.right= getImagePath('right');
-            // });
+            // register watchers for
+            $scope.$watchGroup(['vm.selection.packs.left', 'vm.selection.packs.right'], function () {
+                console.log(vm.loaded());
+            });
         });
     }
 
     function getAlbums() {
         // http request for album resource
-        return $http.get($location['absUrl']() + 'albums').then(function (res) {
+        return $http.get($location['absUrl']() + 'api/albums').then(function (res) {
             // copy result, return closure
             vm.packs = angular.copy(res.data);
             return true;
@@ -76,46 +75,16 @@ function AppController($scope, $http, $location, $timeout, $q) {
 
     function selectImage(n) {
         vm.selection.image = n;
-    //     vm.imageUrl.left = ;
-    //     vm.imageUrl.right = ;
     }
 
     function isSelectedImage(n) {
         return vm.selection.image == n;
     }
 
-    function bothLoaded() {
-         return (vm.loading.right && vm.loading.left);
+    function loaded() {
+        return !(vm.loading.right || vm.loading.left);
     }
 }
-//
-// link: function MySrcLink(scope, element, attrs) {
-//     var img = null,
-//         loadImage = function () {
-//             element[0].src = "";
-//
-//             img = new Image();
-//             img.src = scope.selection;
-//
-//             return img.onload = function () {
-//                 element[0].src = img.src;
-//             };
-//         };
-//
-//
-//     scope.$watch((function () {
-//         return selection;
-//     }), function (newVal, oldVal) {
-//         if (oldVal !== newVal) {
-//             console.log('ASD');
-//             scope.loading = true;
-//             element.class = 'loading';
-//             loadImage();
-//             // if (loadImage() == true) {
-//             //     scope.loading = false;
-//             // }
-//         }
-//
 
 app.directive("dynImg", function ($q) {
     return {
@@ -129,6 +98,7 @@ app.directive("dynImg", function ($q) {
             scope.$watch(function () {
                     return scope.dynSrc;
                 }, function () {
+                    console.log(scope.dynSrc);
                     scope.loading = true;
                     var img = new Image();
                     img.onload = function () {
@@ -138,7 +108,9 @@ app.directive("dynImg", function ($q) {
                                 resolve(true);
                             }
                         }).then(function (res) {
-                            // scope.loading = false;
+                            $('.slider').slider({
+                                showInstruction: false
+                            });
                         });
                     };
                     img.src = scope.dynSrc;

@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="vendors.css">
     <link rel="stylesheet" href="app.css">
 </head>
-<body ng-controller="AppController as vm">
+<body ng-controller="IndexController as vm">
 <div class="side">
     <div class="side-head">
         <h1 class="side-title">
@@ -22,9 +22,6 @@
                  alt="" width="178" height="100">
         </div>
     </div>
-    <!--<select class="custom-select" ng-if="packs" ng-model="selection.image"-->
-    <!--ng-options="image as image + 1 for image in images">-->
-    <!--</select>-->
     <div class="side-footer">
         <a href="https://github.com/mrmnml/skytexco" class="git">click for some git</a>
     </div>
@@ -54,33 +51,23 @@
             <div class="col-xs-12">
                 <div class="slider">
                     <div class="spinner">
-                        <i ng-if="vm.bothLoaded()" class="fa fa-cog fa-spin fa-3x fa-fw "></i>
+                        <i ng-hide="vm.loaded()" class="fa fa-cog fa-spin fa-3x fa-fw "></i>
                     </div>
                     <div class="slider responsive">
                         <div class="left image">
-                            <dyn-img loading="vm.loading.left" ng-if="vm.loaded" dyn-src="vm.getImagePath('left')"></dyn-img>
+                            <dyn-img loading="vm.loading.left" dyn-src="vm.getImagePath('left')"></dyn-img>
                         </div>
                         <div class="right image">
-                            <dyn-img loading="vm.loading.right" ng-if="vm.loaded" dyn-src="vm.getImagePath('right')"></dyn-img>
+                            <dyn-img loading="vm.loading.right" dyn-src="vm.getImagePath('right')"></dyn-img>
                         </div>
-                        <!--<div class="right image">-->
-                            <!--&lt;!&ndash;<img position="right" />&ndash;&gt;-->
-                            <!--<img loading="vm.loading.right" ng-if="vm.loaded" my-src="{{ vm.getImagePath('right') }}"/>-->
-                        <!--</div>-->
                     </div>
                 </div>
             </div>
         </div>
-        {{ vm.selection }}
     </div>
 </div>
 
 <script src="vendors.js"></script>
 <script src="app.js"></script>
-<script type="text/javascript">
-    $('.slider').slider({
-        showInstruction: false
-    });
-</script>
 </body>
 </html>

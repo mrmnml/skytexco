@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="app" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Skyrim Texture Companion</title>
+    <link rel="stylesheet" href="vendors.css">
+    <link rel="stylesheet" href="app.css">
+</head>
+<body ng-controller="UploadController as vm">
+<div class="side">
+    <div class="side-head">
+        <h1 class="side-title">
+            Skyrim<br>
+            Texture<br>
+            Companion
+        </h1>
+    </div>
+    <div class="side-main">
+
+    </div>
+    <div class="side-footer">
+        <a href="https://github.com/mrmnml/skytexco" class="git">click for some git</a>
+    </div>
+</div>
+<div class="main">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <form action="api/upload" method="post" enctype="multipart/form-data">
+                    <input type="text" name="1" id="1">
+                    <input type="text" name="2" id="2">
+                    <input type="file" name="file" id="file">
+                    <button type="submit">go</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="vendors.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

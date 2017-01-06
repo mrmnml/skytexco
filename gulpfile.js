@@ -61,7 +61,7 @@ gulp.task('vendors-fonts', function () {
         .pipe(gulp.dest('dist/fonts'))
 });
 gulp.task('html', function () {
-    return gulp.src('src/*.html')
+    return gulp.src('src/view/*.html')
         .pipe(gulp.dest('dist'))
 });
 gulp.task('php', function () {
@@ -79,12 +79,10 @@ gulp.task('thumbs', function () {
         .pipe(gulp.dest('dist'))
 });
 
-/* updated watch task to include sass */
-
 gulp.task('default', ['complete'], function () {
     gulp.watch('src/*.js', ['app-js']);
     gulp.watch('src/*.less', ['app-less']);
-    gulp.watch('src/*.html', ['html']);
+    gulp.watch('src/view/*.html', ['html']);
     gulp.watch('src/*.php', ['php']);
 });
 gulp.task('media', ['packs', 'thumbs']);
